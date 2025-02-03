@@ -18,5 +18,10 @@
   "packageManager": "pnpm@9.12.3",
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "@covalenthq/ai-agent-sdk": "^0.2.6",
+    "@graphprotocol/graph-cli": "^0.95.0",
+    "@graphprotocol/graph-ts": "^0.37.0"
   }
 }
