@@ -488,7 +488,7 @@ export class TransactionCollectorService {
     detectedPatterns: string[];
   }> {
     try {
-      return null;
+      // return null;
       const tradeData = trades.map((trade) => ({
         timestamp: trade.timestamp,
         dex: trade.dex,
@@ -753,7 +753,7 @@ export class TransactionCollectorService {
         ...basicScamAnalysis,
         sophisticatedPatterns: sophisticatedAnalysis.patterns,
         confidence: sophisticatedAnalysis.confidence,
-        // aiAnalysis: await this.analyzeWithAI(trades),
+        aiAnalysis: await this.analyzeWithAI(trades),
       };
 
       return {
