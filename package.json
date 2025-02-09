@@ -22,6 +22,7 @@
   "dependencies": {
     "@covalenthq/ai-agent-sdk": "^0.2.6",
     "@graphprotocol/graph-cli": "^0.95.0",
-    "@graphprotocol/graph-ts": "^0.37.0"
+    "@graphprotocol/graph-ts": "^0.37.0",
+    "hardhat": "^2.22.18"
   }
 }

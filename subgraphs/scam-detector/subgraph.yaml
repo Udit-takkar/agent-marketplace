@@ -1,0 +1,32 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ScamDetector
+    network: mainnet
+    source:
+      abi: ScamDetector
+      # TODO: Add the contract address
+      address: "0x..."
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ScamReport
+        - Evidence
+        - ScamPattern
+        - DetectedPattern
+        - ScammerAddress
+      abis:
+        - name: ScamDetector
+          file: ./abis/ScamDetector.json
+      eventHandlers:
+        - event: ScamReported(indexed address,string,uint8,bytes32,string)
+          handler: handleScamReported
+        - event: EvidenceSubmitted(indexed bytes32,string,bytes)
+          handler: handleEvidenceSubmitted
+        - event: PatternDetected(bytes32,address,uint256)
+          handler: handlePatternDetected
+      file: ./src/mapping.ts

@@ -1,0 +1,54 @@
+type ScamReport @entity {
+  id: ID!
+  timestamp: BigInt!
+  reporter: Bytes!
+  scamType: String!
+  severity: String!
+  confidence: BigDecimal!
+  address: Bytes! # Contract or wallet address involved
+  txHash: Bytes
+  chain: String!
+  description: String
+  status: String! # Confirmed, Pending, Rejected
+  votes: BigInt!
+  evidences: [Evidence!]! @derivedFrom(field: "scamReport")
+  patterns: [ScamPattern!]! @derivedFrom(field: "scamReport")
+}
+
+type Evidence @entity {
+  id: ID!
+  scamReport: ScamReport!
+  evidenceType: String! # Transaction, Contract Code, Social Proof
+  data: String!
+  timestamp: BigInt!
+  submitter: Bytes!
+}
+
+type ScamPattern @entity {
+  id: ID!
+  scamReport: ScamReport!
+  patternType: String! # FlashLoan, RugPull, Phishing, etc.
+  signature: String! # Unique pattern signature
+  frequency: BigInt!
+  lastSeen: BigInt!
+  metadata: String
+}
+
+type DetectedPattern @entity {
+  id: ID!
+  timestamp: BigInt!
+  pattern: ScamPattern!
+  transaction: Bytes!
+  confidence: BigDecimal!
+  metadata: String
+}
+
+type ScammerAddress @entity {
+  id: ID!
+  address: Bytes!
+  reports: [ScamReport!]! @derivedFrom(field: "address")
+  firstSeen: BigInt!
+  lastSeen: BigInt!
+  totalScams: BigInt!
+  riskScore: BigDecimal!
+}
